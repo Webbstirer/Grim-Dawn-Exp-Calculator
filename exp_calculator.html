@@ -1,0 +1,65 @@
+<script>
+
+var expRequired;
+var levelInput;
+var playerLevel;
+var expPM;
+var minutesToLevel;
+var hoursToLevel;
+
+function calculate_exp()
+{
+    levelInput = document.getElementById('userInputLevel').value;
+        if (levelInput)
+        {
+            playerLevel = levelInput;
+            var pL3 = playerLevel*playerLevel*playerLevel
+            var pLp116 = Math.pow(pL3, 1.16)
+            expRequired = eval((((pLp116*32)+((playerLevel*playerLevel)*300))*0.1)+36);
+            document.getElementById('results').innerHTML = expRequired;
+            document.getElementById('requiredLevel').innerHTML = playerLevel;
+        }
+        else
+        {
+            playerLevel = "The level to calculate was not entered";
+            expRequired = "The level to calculate was not entered";
+            document.getElementById('results').innerHTML = expRequired;
+            document.getElementById('requiredLevel').innerHTML = playerLevel;
+        }
+    expPM = document.getElementById('userInputExpPM').value;
+        if (expPM)
+        {
+            minutesToLevel = eval(expRequired/expPM);
+            hoursToLevel = eval(minutesToLevel/60);
+            document.getElementById('results2').innerHTML = minutesToLevel;
+            document.getElementById('results3').innerHTML = hoursToLevel;
+        }
+        else
+        {
+            minutesToLevel = "The amount of EXP per minute was not entered.";
+            hoursToLevel = "The amount of EXP per minute was not entered.";
+            document.getElementById('results2').innerHTML = minutesToLevel;
+            document.getElementById('results3').innerHTML = hoursToLevel; 
+        }
+    
+}
+</script>
+
+<b>Please input the level you would like to calculate the experience for:</b>
+<input type="text" id="userInputLevel" value="">
+<br>
+<br>
+<br>
+<b>Please input the amount of EXP per minute that Grim Internals is currently showing:</b>
+<input type="text" id="userInputExpPM" value="">
+<br>
+<br>
+<br>
+<input type=button value="Calculate" onClick="calculate_exp()"><br>
+<br>
+<br>
+<br>
+Level: <span id="requiredLevel"></span><br>
+EXP Required for level: <span id="results"></span><br>
+Time (<b>in minutes</b>) required for level: <span id="results2"></span><br>
+Time (<b>in hours</b>) required for level: <span id="results3"></span><br>
