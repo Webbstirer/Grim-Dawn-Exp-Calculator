@@ -6,9 +6,12 @@ var playerLevel;
 var expPM;
 var minutesToLevel;
 var hoursToLevel;
+var currentExp;
 
 function calculate_exp()
 {
+    expPM = document.getElementById('userInputExpPM').value;
+    currentExp =  document.getElementById('userInputExpTotal').value; 
     levelInput = document.getElementById('userInputLevel').value;
         if (levelInput)
         {
@@ -21,27 +24,32 @@ function calculate_exp()
         }
         else
         {
-            playerLevel = "The level to calculate was not entered";
-            expRequired = "The level to calculate was not entered";
-            document.getElementById('results').innerHTML = expRequired;
-            document.getElementById('requiredLevel').innerHTML = playerLevel;
+            document.getElementById('results').innerHTML = "The level to calculate was not entered";;
+            document.getElementById('requiredLevel').innerHTML = "The level to calculate was not entered";;
         }
-    expPM = document.getElementById('userInputExpPM').value;
+    
         if (expPM)
         {
-            minutesToLevel = eval(expRequired/expPM);
-            hoursToLevel = eval(minutesToLevel/60);
-            document.getElementById('results2').innerHTML = minutesToLevel;
-            document.getElementById('results3').innerHTML = hoursToLevel;
+            if (currentExp)
+            {
+                minutesToLevel = eval(expRequired-currentEXP)/expPM;
+                hoursToLevel = eval(minutesToLevel/60);
+                document.getElementById('results2').innerHTML = minutesToLevel;
+                document.getElementById('results3').innerHTML = hoursToLevel;
+            }
+            else
+            {
+                document.getElementById('results2').innerHTML = "The amount of current EXP was not entered";
+                document.getElementById('results3').innerHTML = "The amount of current EXP was not entered";
+            }
         }
         else
         {
-            minutesToLevel = "The amount of EXP per minute was not entered.";
-            hoursToLevel = "The amount of EXP per minute was not entered.";
-            document.getElementById('results2').innerHTML = minutesToLevel;
-            document.getElementById('results3').innerHTML = hoursToLevel; 
+            document.getElementById('results2').innerHTML = "The amount of EXP per minute was not entered.";;
+            document.getElementById('results3').innerHTML = "The amount of EXP per minute was not entered.";; 
         }
-    
+      
+        
 }
 </script>
 
@@ -55,11 +63,17 @@ function calculate_exp()
 <br>
 <br>
 <br>
+<b>Please input your current EXP value:</b>
+<input type="text" id="userInputExpTotal" value="">
+<br>
+<br>
+<br>
 <input type=button value="Calculate" onClick="calculate_exp()"><br>
 <br>
 <br>
 <br>
 Level: <span id="requiredLevel"></span><br>
 EXP Required for level: <span id="results"></span><br>
-Time (<b>in minutes</b>) required for level: <span id="results2"></span><br>
-Time (<b>in hours</b>) required for level: <span id="results3"></span><br>
+Time (<b>in minutes</b>) to attain from current level: <span id="results2"></span><br>
+Time (<b>in hours</b>) to attain from current level: <span id="results3"></span><br>
+
